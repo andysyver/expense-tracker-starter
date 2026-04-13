@@ -17,9 +17,13 @@ No test framework is configured.
 
 ## Architecture
 
-Single-component app — all state and UI live in `src/App.jsx`. No routing, no backend, no external state management. Transaction data is hardcoded in component state (not persisted).
+React app split into four components. No routing, no backend, no external state management. Transaction data is hardcoded in component state (not persisted).
+
+- **`App.jsx`** — Root component. Owns the `transactions` state array and passes it down to children.
+- **`Summary.jsx`** — Computes and displays total income, expenses, and balance from transactions.
+- **`TransactionForm.jsx`** — Owns form state (description, amount, type, category). Calls `onAddTransaction` callback to add new transactions.
+- **`TransactionList.jsx`** — Owns filter state. Filters and renders the transactions table.
 
 ## Known Issues
 
-- Transaction amounts are stored as strings, causing `reduce()` to concatenate instead of sum (the intentional bug)
 - "Freelance Work" is marked as `type: "expense"` but should be `type: "income"`
