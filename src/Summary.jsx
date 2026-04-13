@@ -9,19 +9,25 @@ function Summary({ transactions }) {
 
   const balance = totalIncome - totalExpenses;
 
+  const formatCurrency = (val) =>
+    val.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
   return (
     <div className="summary">
-      <div className="summary-card">
-        <h3>Income</h3>
-        <p className="income-amount">${totalIncome}</p>
+      <div className="summary-card income">
+        <div className="icon">&#8593;</div>
+        <div className="label">Income</div>
+        <div className="value">${formatCurrency(totalIncome)}</div>
       </div>
-      <div className="summary-card">
-        <h3>Expenses</h3>
-        <p className="expense-amount">${totalExpenses}</p>
+      <div className="summary-card expense">
+        <div className="icon">&#8595;</div>
+        <div className="label">Expenses</div>
+        <div className="value">${formatCurrency(totalExpenses)}</div>
       </div>
-      <div className="summary-card">
-        <h3>Balance</h3>
-        <p className="balance-amount">${balance}</p>
+      <div className="summary-card balance">
+        <div className="icon">&#9670;</div>
+        <div className="label">Balance</div>
+        <div className="value">${formatCurrency(balance)}</div>
       </div>
     </div>
   );

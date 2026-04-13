@@ -1,160 +1,482 @@
 .app {
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 48px 24px 80px;
 }
 
-h1 {
-  margin-bottom: 4px;
+/* ── Header ── */
+.app-header {
+  margin-bottom: 48px;
+}
+
+.app-header h1 {
+  font-family: var(--font-display);
+  font-size: 2.75rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+
+.app-header h1 .accent {
+  color: var(--accent-amber);
 }
 
 .subtitle {
-  margin-bottom: 20px;
-  color: #666;
+  margin-top: 8px;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
 }
 
+/* ── Summary Cards ── */
 .summary {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 24px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
 }
 
 .summary-card {
-  flex: 1;
-  border: 1px solid #ddd;
-  padding: 14px;
-  background: #fff;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  transition: all var(--transition-medium);
+  position: relative;
+  overflow: hidden;
 }
 
-.summary-card h3 {
-  font-size: 13px;
-  color: #888;
-  margin-bottom: 4px;
+.summary-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  opacity: 0;
+  transition: opacity var(--transition-medium);
 }
 
-.income-amount {
-  color: green;
-  font-size: 20px;
-  font-weight: bold;
+.summary-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-medium);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
 }
 
-.expense-amount {
-  color: red;
-  font-size: 20px;
-  font-weight: bold;
+.summary-card:hover::before {
+  opacity: 1;
 }
 
-.balance-amount {
-  font-size: 20px;
-  font-weight: bold;
+.summary-card.income::before {
+  background: linear-gradient(90deg, var(--accent-green), transparent);
 }
 
-.add-transaction {
-  border: 1px solid #ddd;
-  padding: 16px;
-  margin-bottom: 24px;
-  background: #fff;
+.summary-card.expense::before {
+  background: linear-gradient(90deg, var(--accent-red), transparent);
 }
 
-.add-transaction h2 {
-  font-size: 16px;
-  margin-bottom: 12px;
+.summary-card.balance::before {
+  background: linear-gradient(90deg, var(--accent-amber), transparent);
 }
 
-form {
+.summary-card .label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.summary-card .value {
+  font-family: var(--font-display);
+  font-size: 1.85rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.summary-card.income .value {
+  color: var(--accent-green);
+}
+
+.summary-card.expense .value {
+  color: var(--accent-red);
+}
+
+.summary-card.balance .value {
+  color: var(--accent-amber);
+}
+
+.summary-card .icon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
   display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
 }
 
-form input,
-form select {
-  padding: 8px;
-  border: 1px solid #ccc;
-  font-size: 14px;
+.summary-card.income .icon {
+  background: var(--accent-green-dim);
+  color: var(--accent-green);
 }
 
-form input[type="text"] {
-  flex: 2;
+.summary-card.expense .icon {
+  background: var(--accent-red-dim);
+  color: var(--accent-red);
 }
 
-form input[type="number"] {
-  flex: 1;
+.summary-card.balance .icon {
+  background: var(--accent-amber-dim);
+  color: var(--accent-amber);
 }
 
-form select {
-  flex: 1;
+/* ── Section Cards ── */
+.section-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  margin-bottom: 24px;
 }
 
-form button {
-  padding: 8px 20px;
-  background: #333;
-  color: #fff;
-  border: none;
+.section-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-title .title-icon {
+  color: var(--accent-amber);
+  font-size: 0.9rem;
+}
+
+/* ── Form ── */
+.form-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr auto;
+  gap: 10px;
+  align-items: end;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-field label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.form-field input,
+.form-field select {
+  padding: 10px 14px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  transition: all var(--transition-fast);
+  outline: none;
+  width: 100%;
+}
+
+.form-field input::placeholder {
+  color: var(--text-muted);
+}
+
+.form-field input:focus,
+.form-field select:focus {
+  border-color: var(--accent-amber);
+  background: rgba(212, 165, 74, 0.05);
+  box-shadow: 0 0 0 3px rgba(212, 165, 74, 0.08);
+}
+
+.form-field select {
   cursor: pointer;
-  font-size: 14px;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238a8793' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 32px;
 }
 
-.spending-chart {
-  border: 1px solid #ddd;
-  padding: 16px;
-  margin-bottom: 24px;
-  background: #fff;
+.form-field select option {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
 }
 
-.spending-chart h2 {
-  font-size: 16px;
-  margin-bottom: 12px;
+.btn-add {
+  padding: 10px 24px;
+  background: var(--accent-amber);
+  color: var(--bg-primary);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+  height: 40px;
 }
 
-.transactions {
-  margin-bottom: 24px;
+.btn-add:hover {
+  background: #e0b35a;
+  box-shadow: 0 4px 16px rgba(212, 165, 74, 0.3);
+  transform: translateY(-1px);
 }
 
-.transactions h2 {
-  font-size: 16px;
-  margin-bottom: 12px;
+.btn-add:active {
+  transform: translateY(0);
 }
 
+/* ── Filters ── */
 .filters {
   display: flex;
-  gap: 8px;
-  margin-bottom: 12px;
+  gap: 10px;
+  margin-bottom: 16px;
 }
 
-.filters select {
-  padding: 6px;
-  border: 1px solid #ccc;
-  font-size: 13px;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-thead {
-  background: #f5f5f5;
-}
-
-th, td {
-  padding: 10px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-  font-size: 14px;
-}
-
-th {
-  font-size: 12px;
-  color: #888;
-  text-transform: uppercase;
-}
-
-.delete-btn {
-  padding: 4px 10px;
-  background: #eee;
-  border: 1px solid #ccc;
+.filter-select {
+  padding: 8px 14px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
   cursor: pointer;
-  font-size: 12px;
-  color: #333;
+  transition: all var(--transition-fast);
+  outline: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%235c5a65' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 28px;
+}
+
+.filter-select option {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.filter-select:focus {
+  border-color: var(--accent-amber);
+}
+
+/* ── Table ── */
+.transaction-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.transaction-table thead th {
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.transaction-table tbody tr {
+  transition: background var(--transition-fast);
+}
+
+.transaction-table tbody tr:hover {
+  background: var(--bg-card-hover);
+}
+
+.transaction-table tbody td {
+  padding: 14px 16px;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  vertical-align: middle;
+}
+
+.transaction-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.td-description {
+  color: var(--text-primary) !important;
+  font-weight: 500;
+}
+
+.td-date {
+  font-variant-numeric: tabular-nums;
+  font-size: 0.8rem !important;
+  color: var(--text-muted) !important;
+}
+
+.category-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-transform: capitalize;
+}
+
+.amount-income {
+  color: var(--accent-green) !important;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.amount-expense {
+  color: var(--accent-red) !important;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.btn-delete {
+  padding: 5px 12px;
+  background: transparent;
+  border: 1px solid rgba(239, 107, 107, 0.2);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-delete:hover {
+  background: var(--accent-red-dim);
+  border-color: rgba(239, 107, 107, 0.4);
+  color: var(--accent-red);
+}
+
+/* ── Chart ── */
+.spending-chart {
+  margin-bottom: 24px;
+}
+
+.spending-chart .recharts-cartesian-grid line {
+  stroke: var(--border-subtle);
+}
+
+.spending-chart .recharts-text {
+  fill: var(--text-muted);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+}
+
+.chart-tooltip {
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--border-medium) !important;
+  border-radius: var(--radius-sm) !important;
+  padding: 10px 14px !important;
+  box-shadow: var(--shadow-elevated) !important;
+}
+
+.chart-tooltip .label {
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  text-transform: capitalize;
+  margin-bottom: 2px;
+}
+
+.chart-tooltip .value {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* ── Empty State ── */
+.empty-state {
+  text-align: center;
+  padding: 48px 24px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .app {
+    padding: 32px 16px 64px;
+  }
+
+  .app-header h1 {
+    font-size: 2rem;
+  }
+
+  .summary {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .form-grid .form-field:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .form-grid .btn-add {
+    grid-column: 1 / -1;
+  }
+
+  .transaction-table {
+    font-size: 0.8rem;
+  }
+}
+
+/* ── Animations ── */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.app-header {
+  animation: fadeInUp 500ms ease-out;
+}
+
+.summary-card {
+  animation: fadeInUp 500ms ease-out both;
+}
+
+.summary-card:nth-child(1) { animation-delay: 80ms; }
+.summary-card:nth-child(2) { animation-delay: 160ms; }
+.summary-card:nth-child(3) { animation-delay: 240ms; }
+
+.section-card {
+  animation: fadeInUp 500ms ease-out 300ms both;
 }
