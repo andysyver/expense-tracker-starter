@@ -10,7 +10,8 @@ function TransactionForm({ onAddTransaction }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!description || !amount) return;
+    const parsedAmount = Number(amount);
+    if (!description || !parsedAmount || parsedAmount <= 0) return;
 
     onAddTransaction({
       id: Date.now(),
